@@ -17,7 +17,7 @@ const showProducts = (products) => {
     const rating = product.rating;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product shadow-sm m-1">
+    div.innerHTML = `<div class="single-product shadow-sm m-1 my-3">
       <div>
     <img class="product-image" src=${image}></img>
       </div>
@@ -27,6 +27,7 @@ const showProducts = (products) => {
       <h2>Price: $ ${product.price}</h2>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
       <button onclick="loadProduct(${product.id})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Details </button>
+      </div>
       `;
     document.getElementById("all-products").appendChild(div);
 
@@ -43,10 +44,8 @@ const loadProduct = (pId) => {
 }
 // show Single product in Modal
 const showSingleProduct = (product) => {
-  // console.log(product.title);
   const image = product.image;
   const rating = product.rating;
-  // document.getElementById('exampleModalLabel').innerText = `${product.title}`;
   const div = document.createElement("div");
   div.textContent = '';
   div.classList.add("product");

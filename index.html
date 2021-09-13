@@ -20,14 +20,8 @@
 <body>
   <header></header>
   <main class="main">
+    <!-- search option start -->
     <div class="search-field">
-      <!-- <div class="search-box">
-        <input id="input-field" class="search-field" type="text" />
-        <button type="button" class="btn btn-primary search-button" data-toggle="button" aria-pressed="false"
-          autocomplete="off" id="search-btn" onclick="loadProducts()">
-          Search
-        </button>
-      </div> -->
       <div class="input-group mb-3 w-50 mx-auto p-5">
         <input id="search-field" type="text" class="form-control"
           placeholder="Search now, The best collection of products" aria-label="Recipient's username"
@@ -36,14 +30,10 @@
           id="button-search">Search</button>
       </div>
     </div>
+    <!-- search option end -->
     <div class="row">
-
       <div class="col-md-9 col-lg-9 col-sm-7">
-        <!-- Modal -->
-        <!-- Button trigger modal -->
-
-
-        <!-- Modal -->
+        <!-- modal start for single product details button-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -58,10 +48,12 @@
             </div>
           </div>
         </div>
-        <!-- Modal end -->
+        <!-- modal end for single product details  button -->
+        <!-- show all products  -->
         <div id="all-products" class="">
         </div>
       </div>
+      <!-- cart option start here  -->
       <div class="col-md-3 col-lg-3 col-sm-5 cart-main">
         <div class="cart" id="my-cart">
           <table class="table">
@@ -111,6 +103,7 @@
           </div>
         </div>
       </div>
+      <!-- cart option end here  -->
     </div>
   </main>
   <footer></footer>
