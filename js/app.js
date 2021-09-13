@@ -1,3 +1,4 @@
+// Call API for All products 
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -11,24 +12,58 @@ loadProducts();
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
+    // Show All Products 
     const image = product.image;
     const rating = product.rating;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
+    div.innerHTML = `<div class="single-product shadow-sm m-1">
       <div>
     <img class="product-image" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
+      <h4>${product.title}</h4>
       <p>Category: ${product.category}</p>
-      <p class="text-success fw-bold">Rating : ${rating.rate} / 5 & ${rating.count} Reviews</p>
+      <p class="text-success">Rating : ${rating.rate} / 5 & ${rating.count} Reviews</p>
       <h2>Price: $ ${product.price}</h2>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <button onclick="loadProduct(${product.id})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Details </button>
       `;
     document.getElementById("all-products").appendChild(div);
+
   }
 };
+
+// Call API for Single products 
+const loadProduct = (pId) => {
+  // console.log(pId);
+  fetch(`https://fakestoreapi.com/products/${pId}`)
+    .then(res => res.json())
+    .then(json => showSingleProduct(json));
+  document.getElementById("modal-body").textContent = '';
+}
+// show Single product in Modal
+const showSingleProduct = (product) => {
+  // console.log(product.title);
+  const image = product.image;
+  const rating = product.rating;
+  // document.getElementById('exampleModalLabel').innerText = `${product.title}`;
+  const div = document.createElement("div");
+  div.textContent = '';
+  div.classList.add("product");
+  div.innerHTML = `<div class="single-product text-center">
+      <div>
+    <img class="product-image" src=${image}></img>
+      </div>
+      <h4>${product.title}</h4>
+      <p>Category: ${product.category}</p>
+      <p class="text-success">Rating : ${rating.rate} / 5 & ${rating.count} Reviews</p>
+      <h2>Price: $ ${product.price}</h2>      
+      <p><span class="fw-bold text-info">Description:</span><br> ${product.description}</p>
+      `;
+  document.getElementById("modal-body").appendChild(div);
+}
+
+
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -38,7 +73,6 @@ const addToCart = (id, price) => {
   document.getElementById("total-Products").innerText = count;
   updateTotal();
 };
-
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -55,7 +89,7 @@ const updatePrice = (id, value) => {
 
 // set innerText function
 const setInnerText = (id, value) => {
-  document.getElementById(id).innerText = Math.round(value);
+  document.getElementById(id).innerText = value.toFixed(2);
 };
 
 // update delivery charge and total Tax
@@ -79,5 +113,5 @@ const updateTaxAndCharge = () => {
 const updateTotal = () => {
   const grandTotal = getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
